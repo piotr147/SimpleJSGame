@@ -57,7 +57,6 @@ function startGame() {
     console.log("speed: " + obstacleSpeed);
     obsMinDistance = 300;
     obsMaxDistance = 400;
-    // obstacleSpeed = 4;
     dist = 0;
     distCoin = 0;
     deathSound = new Audio();
@@ -139,7 +138,6 @@ function updateGameArea() {
 
     if(distCoin <= 0) {
         distCoin = Math.floor(coinMinDistance + Math.random() * (coinMaxDistance - coinMinDistance)); 
-        // losowanie dystansu miedzy przeszkodami
     }
     else distCoin -= obstacleSpeed;
     
@@ -153,7 +151,7 @@ function updateGameArea() {
         } 
     }
 
-    for (i = 0; i < myCoins.length; i += 1) {  // sprawdzanie kolizji
+    for (i = 0; i < myCoins.length; i += 1) {  // sprawdzanie monetek
         if (myPiece.detectCrash(myCoins[i])) {
             
             coinsScore +=1;
@@ -223,7 +221,7 @@ function updateGameArea() {
         for (i = 0; i < myObstacles.length; i += 1) {
             if(i == 0 && myObstacles[i].x <= 0)
             {
-                // usuwanie przeszkody (nie wiem czy potrzebne xd)
+                // usuwanie przeszkody
                 myObstacles.shift();
             }
             myObstacles[i].x -= obstacleSpeed;
@@ -234,7 +232,7 @@ function updateGameArea() {
         for (i = 0; i < myCoins.length; i += 1) {
             if(i == 0 && myCoins[i].x <= 0)
             {
-                // usuwanie monety (nie wiem czy potrzebne xd)
+                // usuwanie monety
                 myCoins.shift();
                 coinsMissed += 1;
             }
@@ -254,10 +252,10 @@ function updateGameArea() {
     else{
         // ekran konca gry
         finalText1 = new component("40px", "Consolas", "red", 100, 100, "text");
-        finalText1.text = "Your score: " + myGameArea.frameNo;// + " Click to reset game";
+        finalText1.text = "Your score: " + myGameArea.frameNo;
         finalText1.update();
         finalText2 = new component("40px", "Consolas", "red", 100, 150, "text");
-        finalText2.text = "Coins collected: " + coinsScore;// + " Click to reset game";
+        finalText2.text = "Coins collected: " + coinsScore;
         finalText2.update();
         finalText3 = new component("40px", "Consolas", "red", 100, 200, "text");
         finalText3.text = "Coins missed: " + coinsMissed;
@@ -280,10 +278,11 @@ function canvasClicked() {
         else
             myPiece.y = pieceUpPosition;
         switchSound.play();
+
+        
     }
     else{
         gameEnd = false;
         document.location.reload();
-        //startGame();
     }
 }
